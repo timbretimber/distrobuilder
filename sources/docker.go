@@ -71,9 +71,8 @@ func (s *docker) Run() error {
 	systemCtx := &types.SystemContext{
 		DockerInsecureSkipTLSVerify: types.OptionalBoolFalse,
 	}
-	policy, err := signature.DefaultPolicy(systemCtx)
-	if err != nil {
-		return fmt.Errorf("Failed to create policy: %w", err)
+	policy := &signature.Policy{
+		Default: []signature.PolicyRequirement{signature.NewPRInsecureAcceptAnything()},
 	}
 	policyCtx, err := signature.NewPolicyContext(policy)
 	if err != nil {
