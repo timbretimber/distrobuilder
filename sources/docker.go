@@ -79,7 +79,7 @@ func (s *docker) Run() error {
 		return fmt.Errorf("Failed to create policy context: %w", err)
 	}
 
-	defer policyCtx.Destroy()
+	defer func() { _ = policyCtx.Destroy() }()
 
 	copyOptions := &copy.Options{
 		RemoveSignatures: true,
