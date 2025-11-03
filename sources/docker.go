@@ -7,6 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
+	imgspec "github.com/opencontainers/image-spec/specs-go/v1"
+
 	"github.com/opencontainers/umoci/oci/cas/dir"
 	"github.com/opencontainers/umoci/oci/casext"
 	"github.com/opencontainers/umoci/oci/layer"
@@ -17,8 +19,6 @@ import (
 	"go.podman.io/image/v5/signature"
 	"go.podman.io/image/v5/transports/alltransports"
 	"go.podman.io/image/v5/types"
-
-	imgspec "github.com/opencontainers/image-spec/specs-go/v1"
 )
 
 type docker struct {
