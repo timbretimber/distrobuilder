@@ -3,11 +3,12 @@ ARCHIVE=distrobuilder-$(VERSION).tar
 GO111MODULE=on
 SPHINXENV=.sphinx/venv/bin/activate
 GOPATH=$(shell go env GOPATH)
+GOFLAGS=-tags=containers_image_storage_stub,containers_image_docker_daemon_stub,containers_image_openpgp
 
 .PHONY: default
 default:
 	gofmt -s -w .
-	go install -v ./...
+	GOFLAGS=$(GOFLAGS) go install -v ./...
 	@echo "distrobuilder built successfully"
 
 .PHONY: update-gomod
