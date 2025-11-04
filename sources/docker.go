@@ -75,6 +75,7 @@ func (s *docker) Run() error {
 	policy := &signature.Policy{
 		Default: []signature.PolicyRequirement{signature.NewPRInsecureAcceptAnything()},
 	}
+
 	policyCtx, err := signature.NewPolicyContext(policy)
 	if err != nil {
 		return fmt.Errorf("Failed to create policy context: %w", err)
