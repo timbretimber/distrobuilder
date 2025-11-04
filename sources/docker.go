@@ -8,11 +8,9 @@ import (
 	"path/filepath"
 
 	imgspec "github.com/opencontainers/image-spec/specs-go/v1"
-
 	"github.com/opencontainers/umoci/oci/cas/dir"
 	"github.com/opencontainers/umoci/oci/casext"
 	"github.com/opencontainers/umoci/oci/layer"
-
 	"go.podman.io/image/v5/copy"
 	"go.podman.io/image/v5/docker/reference"
 	"go.podman.io/image/v5/oci/layout"
