@@ -46,11 +46,13 @@ func (s *docker) Run() error {
 
 	// Docker references with both a tag and digest are currently not supported
 	var imageTag string
-	if digested, ok := imageRef.(reference.Digested); ok {
+	digested, ok := imageRef.(reference.Digested)
+	if ok {
 		imageTag = digested.Digest().String()
 	} else {
 		imageTag = "latest"
-		if tagged, ok := imageRef.(reference.NamedTagged); ok {
+		tagged, ok := imageRef.(reference.NamedTagged)
+		if ok {
 			imageTag = tagged.Tag()
 		}
 	}
@@ -69,6 +71,7 @@ func (s *docker) Run() error {
 	systemCtx := &types.SystemContext{
 		DockerInsecureSkipTLSVerify: types.OptionalBoolFalse,
 	}
+
 	policy := &signature.Policy{
 		Default: []signature.PolicyRequirement{signature.NewPRInsecureAcceptAnything()},
 	}
@@ -106,7 +109,8 @@ func (s *docker) Run() error {
 	defer func() { _ = engine.Close() }()
 
 	var manifest imgspec.Manifest
-	if err := json.Unmarshal(copiedManifest, &manifest); err != nil {
+	err = json.Unmarshal(copiedManifest, &manifest)
+	if err != nil {
 		return fmt.Errorf("Failed to parse manifest: %w", err)
 	}
 
